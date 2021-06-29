@@ -29,15 +29,9 @@
 
             @if($playlists->count())
                 @foreach($playlists as $playlist)
-                    <div class="mb-4">
-                        <a href="#" class="font-bold">{{ $playlist->user->username }}</a>
-                        <span class="text-gray-300 text-sm">{{ $playlist->created_at->diffForHumans() }}</span>
-                        <p class="mb-2">{{ $playlist->name }}</p>
-                    </div>
+                    <x-playlist :playlist="$playlist"/>
                 @endforeach
-
                 {{ $playlists->links() }}
-
             @else
                 <p>No playlists yet</p>
             @endif

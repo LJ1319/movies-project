@@ -25,7 +25,7 @@
     >
         <ul>
             <li class="border-b border-gray-700">
-                <a href="{{ route('dashboard') }}"
+                <a href="{{ route('users.dashboard', $playlist->user) }}"
                    class="block hover:bg-gray-700 px-3 py-3 flex items-center"
                 >
                     Dashboard

@@ -24,7 +24,7 @@ class PlaylistController extends Controller
      */
     public function index()
     {
-        $playlists = Playlist::paginate(5);
+        $playlists = Playlist::latest()->paginate(5);
 
         return view('playlists.index', [
             'playlists' => $playlists
@@ -95,11 +95,19 @@ class PlaylistController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return Response
+     * @param Playlist $playlist
+     * @return RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(Playlist $playlist)
     {
-        //
+//        if (!$playlist->ownedBy(auth()->user()))
+//        {
+//
+//        }
+        $this->authorize('delete', $playlist);
+
+        $playlist->delete();
+
+        return back();
     }
 }

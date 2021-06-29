@@ -80,6 +80,8 @@ class MoviesController extends Controller
 
         $playlists = Playlist::paginate(5);
 
+        dump($playlists);
+
         $viewModel = new MovieViewModel($movie, $playlists);
 
         return view('movies.show', $viewModel);

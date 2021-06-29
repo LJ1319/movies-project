@@ -126,23 +126,29 @@
                                             class="text-3xl leading-none hover:text-gray-300">&times;
                                         </button>
                                     </div>
-                                    <div class="modal-body px-4 py-2 text-center text-lg border-2 border-gray-500 rounded-lg">
+
+                                    <div
+                                        class="modal-body px-4 py-2 text-center text-lg border-2 border-gray-500 rounded-lg">
                                         @if($playlists->count())
                                             @foreach($playlists as $playlist)
-                                                <div class="mb-4 rounded-lg">
-                                                    <a href="{{ route('playlists') }}"
-                                                       class="mb-2">{{ $playlist->name }}</a>
-                                                </div>
+                                                @if($playlist->ownedBy(auth()->user()))
+                                                    <div class="mb-4 rounded-lg">
+                                                        <a href="{{ route('playlists') }}"
+                                                           class="mb-2">{{ $playlist->name }}</a>
+                                                    </div>
+                                                @endif
                                             @endforeach
 
                                             {{ $playlists->links() }}
 
-                                        @else
-                                            <div class="mb-4 border-2 border-gray-700 rounded-lg">
-                                                <p class="text-gray-500">No playlists yet</p>
-                                                <a href="{{ route('playlists') }}"
-                                                   class="mb-2">Create a playlist</a>
-                                            </div>
+                                            @if(!$playlist->ownedBy(auth()->user()))
+                                                <div
+                                                    class="m-auto border-2 border-gray-700 rounded-lg items-center text-center">
+                                                    <p class="text-gray-500">No playlists yet</p>
+                                                    <a href="{{ route('playlists') }}"
+                                                       class="mb-2">Create a playlist</a>
+                                                </div>
+                                            @endif
                                         @endif
                                     </div>
                                 </div>

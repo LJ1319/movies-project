@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Playlist;
+use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -20,9 +22,15 @@ class DashboardController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function index()
+    public function index(User $user)
     {
-        return view('users.dashboard');
+        $playlists = $user->playlists()->with(['user'])->paginate(5);
+
+        return view('users.dashboard', [
+            'user' => $user,
+            'playlists' => $playlists
+        ]);
+
     }
 
     /**
