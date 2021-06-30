@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\ViewModels\MovieViewModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +10,8 @@ class Playlist extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'user_id'
     ];
 
     public function user()
@@ -19,14 +19,14 @@ class Playlist extends Model
         return $this->belongsTo(User::class);
     }
 
+
     public function ownedBy(User $user)
     {
         return $user->id === $this->user_id;
     }
 
-
-//    public function movie()
-//    {
-//        return $this->hasMany(MovieViewModel::class);
-//    }
+    public function movies()
+    {
+        return $this->hasMany(Movie::class);
+    }
 }

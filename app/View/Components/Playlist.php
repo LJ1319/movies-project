@@ -10,6 +10,7 @@ use Illuminate\View\Component;
 class Playlist extends Component
 {
     public $playlist;
+
     /**
      * Create a new component instance.
      *

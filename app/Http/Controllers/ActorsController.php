@@ -7,8 +7,6 @@ use App\ViewModels\ActorViewModel;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
 
 class ActorsController extends Controller
@@ -31,33 +29,12 @@ class ActorsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param int $id
      * @return Application|Factory|View
      */
-    public function show($id)
+    public function show(int $id)
     {
         $actor = Http::withToken(config('services.tmdb.token'))
             ->get('https://api.themoviedb.org/3/person/' . $id)
@@ -74,39 +51,5 @@ class ActorsController extends Controller
         $viewModel = new ActorViewModel($actor, $social, $credits);
 
         return view('actors.show', $viewModel);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param int $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

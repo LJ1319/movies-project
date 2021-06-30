@@ -63,6 +63,4 @@ class MoviesViewModel extends ViewModel
         });
     }
 
-
-
 }

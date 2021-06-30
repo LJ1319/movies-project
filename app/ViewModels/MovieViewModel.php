@@ -42,9 +42,5 @@ class MovieViewModel extends ViewModel
             'cast'
         ]);
 
-
     }
-
-
-
 }

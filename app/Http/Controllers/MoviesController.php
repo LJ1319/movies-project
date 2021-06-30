@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Movie;
 use App\Models\Playlist;
 use App\ViewModels\MoviesViewModel;
 use App\ViewModels\MovieViewModel;
@@ -39,9 +40,6 @@ class MoviesController extends Controller
             $genres,
         );
 
-
-//        dump($viewModel);
-
         return view('movies.index', $viewModel);
     }
 
@@ -78,9 +76,10 @@ class MoviesController extends Controller
             ->get('https://api.themoviedb.org/3/movie/' . $id . '?append_to_response=credits,videos,images')
             ->json();
 
-        $playlists = Playlist::paginate(5);
+        $playlists = Playlist::latest()->with(['user', 'movies'])->paginate(5);
 
-        dump($playlists);
+//        dump($playlists);
+//        dump($movie);
 
         $viewModel = new MovieViewModel($movie, $playlists);
 

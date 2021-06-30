@@ -7,8 +7,6 @@ use Livewire\Component;
 
 class SearchDropdown extends Component
 {
-//    public string $searchMovie = '';
-//    public string $searchTv = '';
     public string $search = '';
 
     public function render()
